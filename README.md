@@ -31,7 +31,7 @@ Hier sind die wichtigsten Repositories für die Installation (Verbesserungen fol
 - [Qgroundcontrol](https://github.com/match-MobRob2/match-drone/blob/main/docs/QGroundControl.md)
 - [ros_gz (jazzy branch)](https://github.com/gazebosim/ros_gz/tree/jazzy)
 - [Livox-SDK2](https://github.com/Livox-SDK/Livox-SDK2)
-- [FAST-LIO2](https://github.com/hku-mars/FAST_LIO)
+- [FAST-LIO2 (ROS2 branch)](https://github.com/hku-mars/FAST_LIO)
 
 ---
 
