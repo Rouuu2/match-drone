@@ -156,7 +156,7 @@ _Tastatursteuerung ist **in Kürze verfügbar**! Bleibe dran für Updates in der
 
 Unten siehst du den aktuellen Transform-Baum, der von deinem System generiert wird (`tf2_tools view_frames`):
 
-![frames_2025-10-20_19 17 52_page-0001](https://github.com/user-attachments/assets/6650c7d9-603c-4708-a161-224e366f7a78)
+![frames_2025-10-20_19 17 52_page-0001](https://github.com/Rouuu2/match-drone/blob/main/frames_2025-10-20_19.17.52_page-0001.jpg)
 
 ## Demnächst verfügbar ✨
 - **setup workspace:**
