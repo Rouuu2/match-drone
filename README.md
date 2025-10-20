@@ -1,31 +1,29 @@
-# ROS2 SLAM Workspace Setup & Simulation Launch Guide 🛠️🤖
+# ROS2 SLAM-Workspace-Setup & Simulationsstart-Anleitung 🛠️🤖
 
-This guide will help you set up a ROS2 SLAM workspace, solve common installation errors, and launch a full simulation stack with QGroundControl, SLAM nodes, and Gazebo. It also provides troubleshooting tips and previews your TF tree.
+Diese Anleitung hilft dir, ein ROS2 SLAM-Workspace einzurichten, häufige Installationsfehler zu lösen und einen vollständigen Simulations-Stack mit QGroundControl, SLAM-Nodes und Gazebo zu starten. Sie enthält auch Tipps zur Fehlerbehebung und eine Vorschau deines TF-Baums.
 
 ---
 
-## Table of Contents 📚
+## Inhaltsverzeichnis 📚
 
-1. [Core Requirements](#core-requirements)
+1. [Kernanforderungen](#kernanforderungen)
 2. [Installation & Setup](#installation--setup)
-3. [Common Errors & Fixes](#common-errors--fixes)
-4. [Launching the Simulation](#launching-the-simulation)
-5. [TF Tree Preview](#tf-tree-preview)
-6. [Coming Soon](#coming-soon)
+3. [Häufige Fehler & Lösungen](#häufige-fehler--lösungen)
+4. [Simulation starten](#simulation-starten)
+5. [TF-Baum Vorschau](#tf-baum-vorschau)
+6. [Demnächst verfügbar](#demnächst-verfügbar)
 
 ---
 
-## Core Requirements 📝
+## Anforderungen 📝
 
-- **OS:** Ubuntu 24.04 LTS Noble 🐧
+- **Betriebssystem:** Ubuntu 24.04 LTS Noble 🐧
 - **ROS2:** Jazzy 
 - **Simulation:** Gazebo Harmonic  + RViz 
 
+## Wichtige Repositories für das Setup Workspace!
 
-
-## Key Repositories for Setup Workspace !
-
-Below are the main repositories referenced for installation ( improvements are comming !):
+Hier sind die wichtigsten Repositories für die Installation (Verbesserungen folgen!):
 
 - [match-drone](https://github.com/rouuu2/match-drone)
 - [PX4-Autopilot](https://github.com/PX4/PX4-Autopilot)
@@ -39,33 +37,33 @@ Below are the main repositories referenced for installation ( improvements are c
 
 ## Installation & Setup ⚙️
 
-### 1. Prepare Your Environment 🌱
+### 1. Umgebung vorbereiten 🌱
 
-- Install ROS2 Jazzy and Gazebo Harmonic (refer to the official ROS2 and Gazebo docs).
-- Clone your workspace and initialize:
+- Installiere ROS2 Jazzy und Gazebo Harmonic (siehe offizielle ROS2- und Gazebo-Dokumentation).
+- Klone dein Workspace und initialisiere:
     ```bash
     mkdir -p ~/slam_ws/src
     cd ~/slam_ws/src
-    # Clone your packages here, e.g.
+    # Klone deine Pakete hier, z.B.
     # git clone https://github.com/.... (Repo)
     ```
 
-### 2. Create and Activate a Python Virtual Environment 
+### 2. Python Virtual Environment erstellen und aktivieren 
 
 ```bash
 python3 -m venv ~/.../venv
 source ~/.../venv/bin/activate
 ```
 
-### 3. Install Python Requirements 📦
+### 3. Python-Abhängigkeiten installieren 📦
 
-- Edit `requirements.txt` to list only real Python packages (see [Common Errors & Fixes](#common-errors--fixes) below).
-- Install dependencies:
+- Bearbeite `requirements.txt`, um nur echte Python-Pakete aufzulisten (siehe [Häufige Fehler & Lösungen](#häufige-fehler--lösungen) unten).
+- Abhängigkeiten installieren:
     ```bash
     pip install -r ~/.../src/match-drone/setup/requirements.txt
     ```
 
-### 4. Install System Tools 🛠️
+### 4. Systemtools installieren 🛠️
 
 ```bash
 sudo apt update
@@ -74,37 +72,37 @@ sudo apt install pcl-tools
 
 ---
 
-## Common Errors & Fixes 🚧
+## Häufige Fehler & Lösungen 🚧
 
-### 1. `pcl_viewer` & `PCL` Installation Error ❌
+### 1. `pcl_viewer` & `PCL` Installationsfehler ❌
 
-**Error:**
+**Fehler:**
 ```
 ERROR: Could not find a version that satisfies the requirement pcl_viewer (from versions: none)
 ERROR: No matching distribution found for pcl_viewer
 ```
 
-**Solution:**
-- Remove or comment out `pcl_viewer` and `PCL` from your `requirements.txt` 
-- Reinstall requirements and install system PCL tools as described above.
+**Lösung:**
+- Entferne oder kommentiere `pcl_viewer` und `PCL` in deiner `requirements.txt` aus.
+- Installiere die Anforderungen erneut und installiere die System-PCL-Tools wie oben beschrieben.
 
-### 2. Cython Error During Build 🐍⚒️
+### 2. Cython-Fehler beim Build 🐍⚒️
 
-**Error:**
+**Fehler:**
 ```
 ModuleNotFoundError: No module named 'Cython'
 ```
 
-**Solution:**
-1. Install Cython in your virtual environment:
+**Lösung:**
+1. Installiere Cython in deinem Virtual Environment:
     ```bash
     pip install Cython
     ```
-2. Prevent colcon from searching your venv:
+2. Verhindere, dass colcon dein venv durchsucht:
     ```bash
     touch ~/../venv/COLCON_IGNORE
     ```
-3. Rebuild your workspace:
+3. Baue dein Workspace erneut:
     ```bash
     cd ~/...
     colcon build
@@ -112,60 +110,58 @@ ModuleNotFoundError: No module named 'Cython'
 
 ---
 
-## Checklist: Verifying Your Installation ✅
+## Checkliste: Überprüfung deiner Installation ✅
 
 ```bash
-python3 --version     # Should show Python 3.12.x or your target version
-pip check             # Should output: "No broken requirements found."
-colcon build          # Should build the workspace without errors
+python3 --version     # Sollte Python 3.12.x oder deine Zielversion anzeigen
+pip check             # Sollte ausgeben: "No broken requirements found."
+colcon build          # Sollte das Workspace ohne Fehler bauen
 ```
 
 ---
 
-## Launching the Simulation 🚀
+## Simulation starten 🚀
 
-Follow these steps in order:
+Folge diesen Schritten in der Reihenfolge:
 
-**1. Start QGroundControl 🕹️**
+**1. QGroundControl starten 🕹️**
 ```bash
 ~/.../src$ ./QGroundControl-x86_64.AppImage
 ```
-> _This launches the GCS for drone control and telemetry._
+> _Startet das GCS für Drohnensteuerung und Telemetrie._
 
-**2. Launch the SLAM Connector 🔗**
+**2. SLAM Connector starten 🔗**
 ```bash
 ros2 launch slam_connect test.launch.py
 ```
 
-**3. Launch Fast-LIO Mapping 🗺️**
+**3. Fast-LIO Mapping starten 🗺️**
 ```bash
 ros2 launch fast_lio mapping.launch.py \
     config_path:=/home/.../.../src/match-drone/slam_connect/config \
     config_file:=slam_params.yaml \
     rviz:=false
 ```
-> _You can edit `slam_params.yaml` to change map/SLAM parameters._
+> _Du kannst `slam_params.yaml` bearbeiten, um Map/SLAM-Parameter zu ändern._
 
-**5. Control the Drone from QGroundControl 🎮**
-- Use QGroundControl for all manual control and mission upload.
+**5. Drohne mit QGroundControl steuern 🎮**
+- Verwende QGroundControl für alle manuellen Steuerungen und Missions-Uploads.
 
-**Remark:**  
-_Keyboard control is **coming soon**! Stay tuned for updates in the parameter file to enable quick map switching and keyboard-based teleoperation._ ⌨️
+**Hinweis:**  
+_Tastatursteuerung ist **in Kürze verfügbar**! Bleibe dran für Updates in der Parameterdatei, um schnelles Map-Switching und Tastatur-Teleoperation zu ermöglichen._ ⌨️
 
 ---
 
-## TF Tree Preview 🌳
+## TF-Baum Vorschau 🌳
 
-Below is the current transform tree generated by your system (`tf2_tools view_frames`):
-
+Unten siehst du den aktuellen Transform-Baum, der von deinem System generiert wird (`tf2_tools view_frames`):
 
 ![frames_2025-10-20_19 17 52_page-0001](https://github.com/user-attachments/assets/6650c7d9-603c-4708-a161-224e366f7a78)
 
-
-## Coming Soon ✨
+## Demnächst verfügbar ✨
 - **setup workspace:**
-- **Keyboard Control:** Direct drone control via keyboard for quick development and testing 
-- **Parameter File Enhancements:** Easily switch maps and configurations via new parameters 
-- **Better Visualization:** Extended RViz and Gazebo integration for richer simulation feedback 
+- **Tastatursteuerung:** Direkte Drohnensteuerung per Tastatur für schnelle Entwicklung und Tests 
+- **Parameterdatei-Verbesserungen:** Einfaches Wechseln von Maps und Konfigurationen über neue Parameter 
+- **Bessere Visualisierung:** Erweiterte RViz- und Gazebo-Integration für detaillierteres Simulations-Feedback 
 
 ---
