@@ -1,0 +1,10 @@
+setuptools
+pandas
+numpy>=1.26
+open3d
+pytest
+eigen
+#PCL
+evo
+xdotool
+#pcl_viewer

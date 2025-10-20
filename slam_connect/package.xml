@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>slam_connect</name>
+  <version>0.0.1</version>
+  <description>Launch and configuration package for PX4-Gazebo simulation with FAST-LIO2 and RViz.</description>
+
+  <!-- Maintainer -->
+  <maintainer email="rouaguetat2020@gmail.com">Roua Guetat</maintainer>
+  <license>TODO: License declaration</license>
+
+  <!-- Build tool -->
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <!-- Launch and RViz -->
+  <exec_depend>launch</exec_depend>
+  <exec_depend>launch_ros</exec_depend>
+  <exec_depend>rviz2</exec_depend>
+
+  <!-- ROS 2 Python -->
+  <exec_depend>rclpy</exec_depend>
+
+  <!-- Gazebo bridge (ROS–Ignition communication) -->
+  <exec_depend>ros_gz_bridge</exec_depend>
+  <exec_depend>ros_gz_sim</exec_depend>  <!-- (optional but usually needed) -->
+
+  <!-- Diagnostics -->
+  <exec_depend>diagnostic_updater</exec_depend>
+
+  <!-- Linting / tests -->
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
+
+  <!-- Build type -->
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>

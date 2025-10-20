@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>slam_diagnostic</name>
+  <version>0.0.1</version>
+  <description>Diagnostic and evaluation utilities for UAV SLAM (LiDAR–IMU, FAST-LIO2, etc.).</description>
+
+  <!-- Maintainer information -->
+  <maintainer email="rouaguetat2020@gmail.com">Roua Guetat</maintainer>
+  <license>MIT</license>
+
+  <!-- Build tool for Python packages -->
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <!-- Runtime dependencies -->
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <exec_depend>nav_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>tf2_ros</exec_depend>
+  <exec_depend>sensor_msgs_py</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+
+  <!-- Optional Python dependencies -->
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-pandas</exec_depend>
+  <exec_depend>python3-open3d</exec_depend>
+
+  <!-- Export build type -->
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>

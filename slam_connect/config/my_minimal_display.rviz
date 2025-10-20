@@ -1,0 +1,184 @@
+# ============================================================================
+# RViz2 Visualization Config File 
+# ----------------------------------------------------------------------------
+# This RViz2 config file is used to visualize the UAV's localization and SLAM
+# system based on LiDAR, IMU, Odometry, TF frames, etc.
+# It includes:
+#   - PointCloud2 visualization
+#   - TF tree
+#   - Robot model (URDF)
+#   - Odometry (ground truth and estimation)
+#   - Laser map accumulation
+#   - IMU display
+#   - Path trajectory
+# Optional elements like Image and Goal setting tools are also included.
+# ----------------------------------------------------------------------------
+# ============================================================================
+
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+    Property Tree Widget:
+      Expanded:  # [OPTIONAL] Panels that are expanded by default
+        - /Global Options1
+        - /Status1
+        - /livox_ground_truth1/Topic1
+        - /TF1/Frames1
+        - /Image1/Topic1
+        - /Odom_ground_truth1/Shape1
+        - /Odom-LIO1/Topic1
+        - /accumulated_livox_LIO1
+        - /accumulated_livox_LIO1/Topic1
+      Splitter Ratio: 0.49
+    Tree Height: 1114
+
+  #- Class: rviz_common/Selection
+    #Name: Selection
+
+  #- Class: rviz_common/Tool Properties
+   # Name: Tool Properties
+    #Expanded:
+      #- /2D Goal Pose1
+      #- /Publish Point1
+    #Splitter Ratio: 0.58
+
+  #- Class: rviz_common/Views
+    #Name: Views
+    #Expanded:
+      #- /Current View1
+    #Splitter Ratio: 0.5
+
+  #- Class: rviz_common/Time
+    #Name: Time
+    #SyncMode: 0  # 0 = no sync, 1 = sync with ROS time
+    #SyncSource: ""
+
+Visualization Manager:
+  Global Options:
+    Background Color: 0; 0; 0  # black background
+    Fixed Frame: map             # All data is visualized relative to this
+    Frame Rate: 30               # FPS for RViz rendering
+
+  Displays:
+    # Grid for orientation
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Cell Size: 1
+      Color: 160; 160; 164
+      Plane Cell Count: 10
+      Plane: XY
+      Enabled: true
+      Alpha: 0.5
+
+    # [OPTIONAL] Robot URDF model
+    - Class: rviz_default_plugins/RobotModel
+      Name: RobotModel
+      Description Source: Topic
+      Description Topic: /robot_description
+      Enabled: false
+
+    # LiDAR PointCloud2 raw scan
+    - Class: rviz_default_plugins/PointCloud2
+      Name: livox_ground_truth
+      Topic: /scan_points_fixed
+      Color: 255; 224; 48   # Yellow
+      Style: Spheres
+      Size (m): 0.05
+      Enabled: false
+
+    # TF Frames visualization
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: true
+      Frames:
+        base_link: true
+        camera_init: true
+        odom: true
+        map_ned: true
+
+    # IMU visualization plugin
+    - Class: rviz_imu_plugin/Imu
+      Name: Imu
+      Topic: /livox/imu_fixed
+      Enabled: false  # Enable to visualize IMU
+
+    # Camera Image viewer [OPTIONAL]
+    #- Class: rviz_default_plugins/Image
+      #Name: Image
+      #Topic: /camera/image
+      #Enabled: false
+
+    # Odometry ground truth (e.g., from /odom)
+    - Class: rviz_default_plugins/Odometry
+      Name: Odom_ground_truth
+      Topic: /odom
+      Shape:
+        Value: Arrow
+        Color: 0; 170; 0   # Green
+      Enabled: false
+
+    # Odometry from FAST-LIO2 (estimated)
+    - Class: rviz_default_plugins/Odometry
+      Name: Odom-LIO
+      Topic: /Odometry
+      Shape:
+        Value: Arrow
+        Color: 255; 25; 0   # Red
+      Enabled: true
+
+    # Registered LiDAR point cloud (filtered, projected)
+    - Class: rviz_default_plugins/PointCloud2
+      Name: registered
+      Topic: /cloud_registered
+      Color: 85; 255; 255  # Cyan
+      Enabled: false
+
+    # Accumulated global map from LiDAR SLAM (Laser map)
+    - Class: rviz_default_plugins/PointCloud2
+      Name: accumulated_livox_LIO
+      Topic: /Laser_map
+      Color: 255; 255; 255
+      Color Transformer: "Z" 
+      Invert Rainbow: true          #  main map uses inverted rainbow
+      Use Rainbow: true
+      Style: Flat Squares
+      Autocompute Intensity Bounds: true
+      Enabled: true
+
+    # Trajectory path visualization (optional)
+    - Class: rviz_default_plugins/Path
+      Name: Path
+      Topic: /path
+      Color: 255; 21; 224  # Magenta
+      Enabled: true
+
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+    - Class: rviz_default_plugins/SetInitialPose
+      Topic: /initialpose
+    - Class: rviz_default_plugins/SetGoal
+      Topic: /goal_pose
+    - Class: rviz_default_plugins/PublishPoint
+      Topic: /clicked_point
+
+  Views:
+    Current:
+      Class: rviz_default_plugins/Orbit
+      Distance: 50.0
+      Focal Point:
+        X: 0
+        Y: 0
+        Z: 0
+      Yaw: 2.1
+      Pitch: 0.6
+      Value: Orbit (rviz)
+
+Window Geometry:
+  Width: 1757
+  Height: 1451
+  X: 151
+  Y: 101

@@ -1,0 +1,128 @@
+# ============================================================
+# FAST-LIO2 SLAM PARAMETERS (Simulation Version)
+# ------------------------------------------------------------
+# Includes tuning, diagnostics, and evaluation metrics sections
+# ============================================================
+
+/**:
+    ros__parameters:
+
+
+
+        ########################################################
+        # === COMMON TOPICS AND TIME SYNC ===
+        ########################################################
+        common:
+            # These topics must match what your ROS–GZ bridges output
+            lid_topic: "/scan_points_fixed"        # from ros_gz_bridge (/gz_scan/points → /scan_points_fixed)
+            imu_topic: "/livox/imu_fixed"          # from ros_gz_bridge IMU bridge
+            # imu_topic: "/imu/data"              # use PX4 built-in IMU
+            #lid_topic: "/scan"            # from bridge_sensors remapping
+            #imu_topic: "/livox/imu"       # from bridge_sensors
+            time_sync_en: false     
+            time_offset_lidar_to_imu: 0.0
+
+
+        ########################################################
+        # === FEATURE EXTRACTION SETTINGS ===
+        ########################################################
+        feature_extract_enable: true
+        point_filter_num: 1
+        max_iteration: 3
+        filter_size_surf: 0.25
+        filter_size_map: 0.25
+        cube_side_length: 100.0
+        runtime_pos_log_enable: false
+        map_file_path: "./forest.pcd"
+
+
+        ########################################################
+        # === PREPROCESSING SETTINGS ===
+        ########################################################
+        preprocess:
+            lidar_type: 4                          # 4 = generic PCL topic (simulation)
+            scan_line: 1                          # number of scan lines (1 for 2D/flat)
+            blind: 0.15                            # ignore very close returns
+            timestamp_unit: 0
+            scan_rate: 10                          # 10 Hz simulated LiDAR
+            dd_lidar_time: false          #  "time" field
+            use_intensity_time: false      # ignore timestamp/intensity fusion
+            ring_as_line: true             # treat "ring" field as "line"
+
+
+        ########################################################
+        # === MAPPING PARAMETERS ===
+        ########################################################
+        mapping:
+            # --- IMU noise covariance ---
+            acc_cov: 0.1
+            gyr_cov: 0.1
+            b_acc_cov: 0.0001
+            b_gyr_cov: 0.0001
+
+            # --- Field of view & detection range ---
+            fov_degree: 60.0
+            det_range: 50.0                        # increase range for Gazebo lidar 
+
+            # --- Extrinsics between LiDAR and IMU ---
+            extrinsic_est_en: false
+            extrinsic_T: [ -0.011, -0.02329, 0.04412 ]
+            #extrinsic_T: [0.0, 0.0, 0.0]           # LiDAR and IMU are co-located in your sim
+            extrinsic_R: [1.0, 0.0, 0.0,
+                          0.0, 1.0, 0.0,
+                          0.0, 0.0, 1.0]
+
+
+        ########################################################
+        # === PUBLISHING CONTROL ===
+        ########################################################
+        publish:
+            path_en: true
+            effect_map_en: false                                                                  
+            map_en: true
+            scan_publish_en: true
+            dense_publish_en: false
+            scan_bodyframe_pub_en: true
+
+
+        ########################################################
+        # === PCD SAVING OPTIONS ===
+        ########################################################
+        pcd_save:
+            pcd_save_en: true
+            interval: 10                           # save every 10 frames
+
+
+        ########################################################
+        # === TUNING / TESTING OPTIONS (DISABLED) ===
+        ########################################################
+        tuning:
+            enable_tuning_mode: false              # master switch
+            voxel_leaf_size: 0.2                   # used for downsampling (inactive)
+            max_range: 60.0                        # max LiDAR range (inactive)
+            adaptive_filtering: false              # enable dynamic filter adjustment
+
+
+        ########################################################
+        # === DIAGNOSTICS / LOGGING OPTIONS (DISABLED) ===
+        ########################################################
+        diagnostics:
+            enable_console_info: false             # print extra info in console
+            enable_debug_clouds: false             # publish debug clouds (topic: /fastlio/debug)
+            save_trajectory_csv: false             # save trajectory as CSV in logs/
+            timing_output: false                   # measure loop timing / performance
+
+
+        ########################################################
+        # === EVALUATION / METRICS LOGGING (DISABLED) ===
+        ########################################################
+        metrics:
+            enable_metrics: false                  # global toggle for metrics computation
+            compute_ate_rmse: false                # compute Absolute Trajectory Error (RMSE)
+            compute_rpe_rmse: false                # compute Relative Pose Error (RMSE)
+            gt_topic: "/ground_truth/pose"         # ground-truth topic (e.g., from Gazebo or mocap)
+            est_topic: "/Odometry"                 # estimated odometry topic from FAST-LIO2
+            save_results: false                    # save results as CSV or YAML
+            results_dir: "./results/metrics"       # default output path for ATE/RPE results
+            chart_output: false                    # enable generation of charts (e.g., via slam_diagnostic)
+            chart_type: "ATE_vs_Time"              # options: ATE_vs_Time, RPE_vs_Distance, etc.

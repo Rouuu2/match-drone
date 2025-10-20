@@ -1,0 +1,12 @@
+livox_ros_driver2_node:
+  ros__parameters:
+    enable_imu: true
+    imu_rate: 200                    # Increase to 200 Hz for PX4 and FAST-LIO2
+    cmdline_config_path: "/home/skander/slam_ws/src/livox_ros_driver2/config/mid360_config.json"
+    xfer_format: 0
+    multi_topic: 1
+    data_src: 0
+    publish_freq: 10
+    output_type: 0
+    frame_id: "lidar_link" #"livox_frame"
+    lidar_broadcast_code: ""

@@ -1,0 +1,178 @@
+# RViz config for visualizing FAST-LIO2 + UAV odometry
+# File location: slam_connect/config/odom_config.rviz 
+
+# ---------------------------
+# RViz GUI Panels (left sidebar)
+# ---------------------------
+Panels:
+  - Class: rviz_common/Displays
+    Name: Displays
+    Help Height: 85
+    Property Tree Widget:
+      Expanded:  # Optional: Which items in the left pane should be expanded by default
+        - /Global Options1
+        - /Status1
+        - /livox_ground_truth1/Topic1
+        - /TF1/Frames1
+        - /Image1/Topic1
+        - /Odom_ground_truth1/Shape1
+        - /Odom-LIO1/Topic1
+        - /accumulated_livox_LIO1
+        - /accumulated_livox_LIO1/Topic1
+    Tree Height: 697
+    Splitter Ratio: 0.49
+
+  - Class: rviz_common/Selection
+    Name: Selection
+
+  - Class: rviz_common/Tool Properties
+    Name: Tool Properties
+    Expanded:
+      - /2D Goal Pose1
+      - /Publish Point1
+
+  - Class: rviz_common/Views
+    Name: Views
+    Expanded:
+      - /Current View1
+
+  - Class: rviz_common/Time
+    Name: Time
+    SyncMode: 0
+    SyncSource: livox_ground_truth  # You can change this to whatever topic you want to sync time with
+
+# ---------------------------
+# Visualization Manager Section
+# ---------------------------
+Visualization Manager:
+  Enabled: true
+  Class: ""
+  Name: root
+
+  Global Options:
+    Background Color: 48; 48; 48        # Background color of RViz (dark grey)
+    Fixed Frame: odom                  # Main reference frame (IMPORTANT: should match your TF tree root)
+    Frame Rate: 30
+
+  # RViz Tools (top toolbar)
+  Tools:
+    - Class: rviz_default_plugins/Interact
+    - Class: rviz_default_plugins/MoveCamera
+    - Class: rviz_default_plugins/Select
+    - Class: rviz_default_plugins/FocusCamera
+    - Class: rviz_default_plugins/Measure
+      Line color: 128; 128; 0
+    - Class: rviz_default_plugins/SetInitialPose
+      Topic:
+        Value: /initialpose
+    - Class: rviz_default_plugins/SetGoal
+      Topic:
+        Value: /goal_pose
+    - Class: rviz_default_plugins/PublishPoint
+      Topic:
+        Value: /clicked_point
+
+  # List of visualization displays
+  Displays:
+    - Class: rviz_default_plugins/Grid
+      Name: Grid
+      Enabled: true
+      Plane: XY
+      Plane Cell Count: 10
+      Cell Size: 1
+      Color: 160; 160; 164
+
+    - Class: rviz_default_plugins/RobotModel
+      Name: RobotModel
+      Enabled: true
+      Description Topic:
+        Value: /robot_description
+      Links:
+        base_link: { Value: true }
+        lidar_link: { Value: true }
+        rotor_0: { Value: true }
+        rotor_1: { Value: true }
+        rotor_2: { Value: true }
+        rotor_3: { Value: true }
+
+    - Class: rviz_default_plugins/PointCloud2
+      Name: livox_ground_truth
+      Topic:
+        Value: /scan_points_fixed
+      Color Transformer: FlatColor
+      Color: 255; 224; 48
+      Enabled: true
+      Size (m): 0.05
+      Style: Spheres
+
+    - Class: rviz_default_plugins/Odometry
+      Name: Odom_ground_truth
+      Topic:
+        Value: /odom
+      Shape:
+        Value: Arrow
+        Color: 0; 170; 0
+      Enabled: true
+
+    - Class: rviz_default_plugins/Odometry
+      Name: Odom-LIO
+      Topic:
+        Value: /Odometry
+      Shape:
+        Value: Arrow
+        Color: 255; 25; 0
+      Enabled: true
+
+    - Class: rviz_default_plugins/Path
+      Name: Path
+      Topic:
+        Value: /path
+      Color: 255; 21; 224
+      Enabled: true
+
+    - Class: rviz_default_plugins/TF
+      Name: TF
+      Enabled: false  # Optional: enable to see frame tree arrows
+
+    - Class: rviz_default_plugins/Image
+      Name: Image
+      Topic:
+        Value: /camera/image
+      Enabled: false  # Optional: only if using a camera
+
+    - Class: rviz_imu_plugin/Imu
+      Name: Imu
+      Topic:
+        Value: /livox/imu_fixed
+      Enabled: false  # Optional: enable to see IMU axes or acceleration
+
+    - Class: rviz_default_plugins/PointCloud2
+      Name: accumulated_livox_LIO
+      Topic:
+        Value: /Laser_map
+      Style: Flat Squares
+      Color Transformer: Intensity
+      Enabled: false  # Optional: set true to view accumulated map
+
+# ---------------------------
+# View / Camera Settings
+# ---------------------------
+Views:
+  Current:
+    Class: rviz_default_plugins/Orbit
+    Name: Current View
+    Distance: 49.08
+    Target Frame: <Fixed Frame>
+    Focal Point:
+      X: 0.19
+      Y: -1.13
+      Z: -0.24
+
+# ---------------------------
+# GUI Window Geometry
+# ---------------------------
+Window Geometry:
+  Height: 999
+  Width: 948
+  X: -32
+  Y: -32
