@@ -6,7 +6,7 @@ Diese Anleitung hilft dir, ein ROS2 SLAM-Workspace einzurichten, häufige Instal
 
 ## Inhaltsverzeichnis 📚
 
-1. [Kernanforderungen](#kernanforderungen)
+1. [Anforderungen](#Anforderungen)
 2. [Installation & Setup](#installation--setup)
 3. [Häufige Fehler & Lösungen](#häufige-fehler--lösungen)
 4. [Simulation starten](#simulation-starten)
@@ -28,7 +28,7 @@ Hier sind die wichtigsten Repositories für die Installation (Verbesserungen fol
 - [match-drone](https://github.com/rouuu2/match-drone)
 - [PX4-Autopilot](https://github.com/PX4/PX4-Autopilot)
 - [mavros](https://github.com/mavlink/mavros)
-- [qgroundcontrol](https://github.com/mavlink/qgroundcontrol)
+- [Qgroundcontrol](https://github.com/match-MobRob2/match-drone/blob/main/docs/QGroundControl.md)
 - [ros_gz (jazzy branch)](https://github.com/gazebosim/ros_gz/tree/jazzy)
 - [Livox-SDK2](https://github.com/Livox-SDK/Livox-SDK2)
 - [FAST-LIO2](https://github.com/hku-mars/FAST_LIO)
