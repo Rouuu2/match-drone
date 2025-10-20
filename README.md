@@ -21,6 +21,20 @@ This guide will help you set up a ROS2 SLAM workspace, solve common installation
 - **ROS2:** Jazzy 
 - **Simulation:** Gazebo Harmonic  + RViz 
 
+
+
+## Key Repositories for Setup Workspace !
+
+Below are the main repositories referenced for installation ( improvements are comming !):
+
+- [match-drone](https://github.com/rouuu2/match-drone)
+- [PX4-Autopilot](https://github.com/PX4/PX4-Autopilot)
+- [mavros](https://github.com/mavlink/mavros)
+- [qgroundcontrol](https://github.com/mavlink/qgroundcontrol)
+- [ros_gz (jazzy branch)](https://github.com/gazebosim/ros_gz/tree/jazzy)
+- [Livox-SDK2](https://github.com/Livox-SDK/Livox-SDK2)
+- [FAST-LIO2](https://github.com/hku-mars/FAST_LIO)
+
 ---
 
 ## Installation & Setup ⚙️
